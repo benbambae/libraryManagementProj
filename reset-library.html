@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Library Data</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Library Management System</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Books</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="text-center">Reset Library Data</h2>
+        <p class="text-center" style="margin: 2rem 0; color: #666;">
+            Click the button below to reset the library database and load the books from the Library folder.
+        </p>
+
+        <div id="message"></div>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <button onclick="resetLibraryData()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                Reset Library Data
+            </button>
+        </div>
+
+        <div style="max-width: 600px; margin: 2rem auto; padding: 1.5rem; background-color: #f8f9fa; border-radius: 8px;">
+            <h3>What does this do?</h3>
+            <ul style="line-height: 2;">
+                <li>Clears all existing book data from localStorage</li>
+                <li>Loads the new book collection from the Library folder</li>
+                <li>Preserves your user account and login session</li>
+                <li>Updates the library with 29 books across 10 categories</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2025 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/library-data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        function resetLibraryData() {
+            // Clear books from localStorage
+            localStorage.removeItem('books');
+
+            // Reinitialize with new library data
+            if (typeof getLibraryBooks === 'function') {
+                const libraryBooks = getLibraryBooks();
+                localStorage.setItem('books', JSON.stringify(libraryBooks));
+
+                showMessage('message',
+                    `Successfully loaded ${libraryBooks.length} books from the Library folder!
+                    <br><br>Categories: Biography, Technology, Psychology, Business, Science, History, Thriller, Finance, Self-Help, Fantasy
+                    <br><br>You can now browse the updated collection.`,
+                    'success');
+
+                // Redirect to browse page after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'browse.html';
+                }, 3000);
+            } else {
+                showMessage('message', 'Error: Library data not found. Please check library-data.js', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -29,9 +29,11 @@ function displayBooksByCategory() {
 function createBookCard(book) {
     const stockStatus = book.stock > 0 ? `In Stock (${book.stock})` : 'Out of Stock';
     const stockClass = book.stock > 0 ? '' : 'style="color: red;"';
+    const coverImage = book.coverImage || 'https://via.placeholder.com/300x450?text=No+Cover';
 
     return `
         <div class="book-card">
+            <img src="${coverImage}" alt="${book.title}" class="book-cover" onerror="this.src='https://via.placeholder.com/300x450?text=No+Cover'">
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>ISBN:</strong> ${book.isbn}</p>
@@ -61,45 +63,53 @@ function displayBookDetail() {
 
     const stockStatus = book.stock > 0 ? `In Stock (${book.stock} available)` : 'Out of Stock';
     const canPurchase = book.stock > 0;
+    const coverImage = book.coverImage || 'https://via.placeholder.com/300x450?text=No+Cover';
 
     const detailHTML = `
         <div class="book-detail">
-            <div class="book-detail-header">
-                <h1>${book.title}</h1>
-                <p style="font-size: 1.2rem; color: #666;">by ${book.author}</p>
-            </div>
+            <div class="book-detail-container">
+                <div>
+                    <img src="${coverImage}" alt="${book.title}" class="book-detail-cover" onerror="this.src='https://via.placeholder.com/300x450?text=No+Cover'">
+                </div>
+                <div class="book-detail-content">
+                    <div class="book-detail-header">
+                        <h1>${book.title}</h1>
+                        <p style="font-size: 1.2rem; color: #666;">by ${book.author}</p>
+                    </div>
 
-            <div class="book-detail-info">
-                <div class="info-item">
-                    <strong>ISBN:</strong>
-                    <span>${book.isbn}</span>
-                </div>
-                <div class="info-item">
-                    <strong>Category:</strong>
-                    <span>${book.category}</span>
-                </div>
-                <div class="info-item">
-                    <strong>Price:</strong>
-                    <span style="font-size: 1.5rem; color: #27ae60; font-weight: bold;">
-                        ${formatCurrency(book.price)}
-                    </span>
-                </div>
-                <div class="info-item">
-                    <strong>Availability:</strong>
-                    <span style="color: ${book.stock > 0 ? '#27ae60' : '#e74c3c'}; font-weight: bold;">
-                        ${stockStatus}
-                    </span>
-                </div>
-            </div>
+                    <div class="book-detail-info">
+                        <div class="info-item">
+                            <strong>ISBN:</strong>
+                            <span>${book.isbn}</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Category:</strong>
+                            <span>${book.category}</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Price:</strong>
+                            <span style="font-size: 1.5rem; color: #27ae60; font-weight: bold;">
+                                ${formatCurrency(book.price)}
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Availability:</strong>
+                            <span style="color: ${book.stock > 0 ? '#27ae60' : '#e74c3c'}; font-weight: bold;">
+                                ${stockStatus}
+                            </span>
+                        </div>
+                    </div>
 
-            <div class="book-description">
-                <h3>Description</h3>
-                <p>${book.description}</p>
-            </div>
+                    <div class="book-description">
+                        <h3>Description</h3>
+                        <p>${book.description}</p>
+                    </div>
 
-            <div class="book-actions">
-                <a href="browse.html" class="btn btn-secondary">Back to Browse</a>
-                ${canPurchase ? `<a href="purchase.html?id=${book.id}" class="btn">Purchase Book</a>` : ''}
+                    <div class="book-actions">
+                        <a href="browse.html" class="btn btn-secondary">Back to Browse</a>
+                        ${canPurchase ? `<a href="purchase.html?id=${book.id}" class="btn">Purchase Book</a>` : ''}
+                    </div>
+                </div>
             </div>
         </div>
     `;
