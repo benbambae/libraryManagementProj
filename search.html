@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Books - Library Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Library Management System</h1>
+            <div class="user-info"></div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Books</a>
+                <a href="search.html">Search by ISBN</a>
+                <a href="add-book.html">Add Book</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="text-center">Search Books by ISBN</h2>
+        <p class="text-center" style="color: #666; margin-bottom: 2rem;">
+            Enter the ISBN number to find detailed book information.
+        </p>
+
+        <div id="message"></div>
+
+        <div class="search-box">
+            <form onsubmit="handleSearch(event)">
+                <input type="text"
+                       id="searchInput"
+                       placeholder="Enter ISBN (e.g., 978-0-061-120-08-4)"
+                       required>
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
+
+        <div id="searchResults"></div>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2024 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/books.js"></script>
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            requireAuth();
+        });
+    </script>
+</body>
+</html>
