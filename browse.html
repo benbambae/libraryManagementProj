@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books - Library Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Library Management System</h1>
+            <div class="user-info"></div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Books</a>
+                <a href="search.html" id="searchLink">Search by ISBN</a>
+                <a href="add-book.html" id="addBookLink">Add Book</a>
+                <a href="login.html" id="loginLink">Login</a>
+                <a href="register.html" id="registerLink">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Browse Our Collection</h2>
+        <p style="margin-bottom: 2rem; color: #666;">
+            Explore our extensive collection of books organized by category.
+        </p>
+
+        <div id="booksContainer"></div>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2024 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/books.js"></script>
+    <script>
+        // Load books when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            displayBooksByCategory();
+
+            // Show/hide links based on login status
+            const currentUser = getCurrentUser();
+            const searchLink = document.getElementById('searchLink');
+            const addBookLink = document.getElementById('addBookLink');
+            const loginLink = document.getElementById('loginLink');
+            const registerLink = document.getElementById('registerLink');
+
+            if (currentUser) {
+                if (searchLink) searchLink.style.display = 'inline';
+                if (addBookLink) addBookLink.style.display = 'inline';
+                if (loginLink) loginLink.style.display = 'none';
+                if (registerLink) registerLink.style.display = 'none';
+            } else {
+                if (searchLink) searchLink.style.display = 'none';
+                if (addBookLink) addBookLink.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
