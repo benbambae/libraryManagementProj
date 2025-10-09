@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Library Management System</h1>
+            <div class="user-info"></div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Books</a>
+                <a href="login.html" id="loginLink">Login</a>
+                <a href="register.html" id="registerLink">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="text-center">
+            <h2>Welcome to Our Online Library</h2>
+            <p style="font-size: 1.1rem; margin: 2rem 0; color: #666;">
+                Explore our extensive collection of books across various categories.
+                Purchase your favorite titles and build your personal library.
+            </p>
+        </div>
+
+        <div style="margin: 3rem 0;">
+            <h3>Features</h3>
+            <div class="book-grid">
+                <div class="book-card">
+                    <h3>Browse by Category</h3>
+                    <p>Explore books organized by Fiction, Non-Fiction, Science, Technology, History, Biography, and more.</p>
+                    <a href="browse.html" class="btn">Start Browsing</a>
+                </div>
+
+                <div class="book-card">
+                    <h3>Detailed Information</h3>
+                    <p>View comprehensive details about each book including author, ISBN, price, and description.</p>
+                    <a href="browse.html" class="btn">View Books</a>
+                </div>
+
+                <div class="book-card">
+                    <h3>Registered User Benefits</h3>
+                    <p>Login to search books by ISBN, add new books to the library, and purchase titles.</p>
+                    <a href="register.html" class="btn">Register Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-2" style="padding: 2rem; background-color: #f8f9fa; border-radius: 8px;">
+            <h3>Ready to Get Started?</h3>
+            <p style="margin: 1rem 0;">
+                Browse our collection as a visitor or register for additional features.
+            </p>
+            <div style="margin-top: 1.5rem;">
+                <a href="browse.html" class="btn" style="margin-right: 1rem;">Browse Books</a>
+                <a href="register.html" class="btn btn-secondary">Create Account</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2024 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Hide login/register links if user is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                const loginLink = document.getElementById('loginLink');
+                const registerLink = document.getElementById('registerLink');
+                if (loginLink) loginLink.style.display = 'none';
+                if (registerLink) registerLink.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
