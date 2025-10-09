@@ -1,7 +1,22 @@
 // Main Application Logic
 
-// Initialize sample books if none exist
+// Initialize sample books and test user if none exist
 function initializeData() {
+    // Initialize test user
+    if (!localStorage.getItem('users')) {
+        const testUsers = [
+            {
+                id: '1',
+                username: 'testuser',
+                email: 'test@library.com',
+                password: 'test123',
+                createdAt: new Date().toISOString()
+            }
+        ];
+        localStorage.setItem('users', JSON.stringify(testUsers));
+    }
+
+    // Initialize books
     if (!localStorage.getItem('books')) {
         const sampleBooks = [
             // Fiction
